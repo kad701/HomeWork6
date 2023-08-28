@@ -5,6 +5,7 @@ public class Main {
         Scanner scanner =new Scanner(System.in);
        // System.out.println("Введите номер задачи ");
         int k=7;
+
         while(k!=0) {
             System.out.println();
             System.out.println("Введите номер задачи ");
