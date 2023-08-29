@@ -1,3 +1,5 @@
+package lesson6;
+
 import java.util.Scanner;
 
 public class Main {
@@ -29,11 +31,7 @@ int kt=0;
                 case 6:
                     Task6.task6();
                     break;
-                case 9:
-                    Task6.task6();
-                    Task4.task4();
-                    break;
-                default:
+                    default:
                     System.out.println("не верный ввод");
             }
 
