@@ -1,3 +1,5 @@
+package lesson6;
+
 import java.util.Scanner;
 public class Task2 {
     static String []str=new String[3];
