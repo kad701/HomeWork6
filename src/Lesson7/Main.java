@@ -7,9 +7,11 @@ import static Lesson7.Zoo.AnimalArray;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter cell amount");
+       // int cAmaunt= scanner.nextInt();
         Zoo Zoo1 = new Zoo(50);
         Zoo1.setAnimalArray();
-        int x;
+        int menuOption;
         do {
             System.out.println("Enter numbers");
             System.out.println("Enter 1 to show ALL ANIMALS IN ZOO");
@@ -19,8 +21,8 @@ public class Main {
                 System.out.println("Enter number");
                 scanner.next();
             }
-            x = scanner.nextInt();
-            switch (x) {
+            menuOption = scanner.nextInt();
+            switch (menuOption) {
                 case 1:
                     Zoo1.showAnimals();
                     break;
@@ -30,6 +32,6 @@ public class Main {
                 default:
             }
         }
-        while (x != 0);
+        while (menuOption != 0);
     }
 }
