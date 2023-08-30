@@ -13,7 +13,7 @@ public class Zoo {
     Scanner scanner = new Scanner(System.in);
 
     public void setAnimalArray() {
-        AnimalArray[1] = new Eagle("Eagle", 0, "cellSize", 15, 25);
+
         System.out.println("Enter animals");               ////////// enter Animals
         int counter = 10;
         int idAnimal = 0;
