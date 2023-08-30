@@ -3,41 +3,48 @@ package Lesson7;
 import java.util.Scanner;
 
 public class Zoo {
-    static public int cageAmount;
-    static public Animal[] AnimalArray;
+    private Animal[] animals;
 
+    public Animal[] getAnimals() {
+        return animals;
+    }
+
+    public void setAnimals(Animal[] animals) {
+        this.animals = animals;
+    }
 
     Scanner scanner = new Scanner(System.in);
 
     public void setAnimalArray() {
         int counter;
         ////////// enter Animals
-        for (int idAnimal = 0; idAnimal < AnimalArray.length; idAnimal++) {
+        // todo check this code!!!
+        for (int idAnimal = 0; idAnimal < animals.length; idAnimal++) {
             counter = (int) (Math.random() * 8 + 1);
             switch (counter) {
                 case 1:
-                    AnimalArray[idAnimal] = new Parrot("Parrot", idAnimal, "cellSize", 15, "Gosha", 25);
+                    animals[idAnimal] = new Parrot("Parrot", idAnimal, "cellSize", 15, "Gosha", 25);
                     break;
                 case 2:
-                    AnimalArray[idAnimal] = new Eagle("Eagle", idAnimal, "cellSize", 15, 25);
+                    animals[idAnimal] = new Eagle("Eagle", idAnimal, "cellSize", 15, 25);
                     break;
                 case 3:
-                    AnimalArray[idAnimal] = new Tiger(idAnimal, "Tiger", "cellSize", 15);
+                    animals[idAnimal] = new Tiger(idAnimal, "Tiger", "cellSize", 15);
                     break;
                 case 4:
-                    AnimalArray[idAnimal] = new Wolf(idAnimal, "Wolf", "cellSize", "Leader");
+                    animals[idAnimal] = new Wolf(idAnimal, "Wolf", "cellSize", "Leader");
                     break;
                 case 5:
-                    AnimalArray[idAnimal] = new Elephant(idAnimal, "Elephant", 1000, 5);
+                    animals[idAnimal] = new Elephant(idAnimal, "Elephant", 1000, 5);
                     break;
                 case 6:
-                    AnimalArray[idAnimal] = new Antiloppe(idAnimal, "Antiloppe", 80, 89);
+                    animals[idAnimal] = new Antiloppe(idAnimal, "Antiloppe", 80, 89);
                     break;
                 case 7:
-                    AnimalArray[idAnimal] = new Shark(idAnimal, "Shark", "sault water", 15);
+                    animals[idAnimal] = new Shark(idAnimal, "Shark", "sault water", 15);
                     break;
                 case 8:
-                    AnimalArray[idAnimal] = new Carp(idAnimal, "Carp", "fresh water", 15);
+                    animals[idAnimal] = new Carp(idAnimal, "Carp", "fresh water", 15);
                     break;
                 default:
             }
@@ -56,7 +63,7 @@ public class Zoo {
             System.out.println("What Animal do you want to feed enter id ");
             int idAnimal = scanner.nextInt();
             //  AnimalArray[idAnimal].getAnimalAmount();
-            System.out.println(AnimalArray[idAnimal].getAnimalType());
+            System.out.println(animals[idAnimal].getAnimalType());
 
 
             System.out.print("1 for fresh meat   ");
@@ -69,19 +76,19 @@ public class Zoo {
 
             switch (feedCounter) {
                 case 1:
-                    AnimalArray[idAnimal].feedAnimal(1);
+                    animals[idAnimal].feedAnimal(1);
                     break;
                 case 2:
-                    AnimalArray[idAnimal].feedAnimal(2);
+                    animals[idAnimal].feedAnimal(2);
                     break;
                 case 3:
-                    AnimalArray[idAnimal].feedAnimal(3);
+                    animals[idAnimal].feedAnimal(3);
                     break;
                 case 4:
-                    AnimalArray[idAnimal].feedAnimal(4);
+                    animals[idAnimal].feedAnimal(4);
                     break;
                 case 5:
-                    AnimalArray[idAnimal].feedAnimal(5);
+                    animals[idAnimal].feedAnimal(5);
                     break;
                 default:
                     System.out.println("NO food type");
@@ -93,8 +100,8 @@ public class Zoo {
     }
 
     public void showAnimals() {
-        for (int i = 0; i < AnimalArray.length; i++) {
-            System.out.print(AnimalArray[i].getAnimalType() + " ");
+        for (int i = 0; i < animals.length; i++) {
+            System.out.print(animals[i].getAnimalType() + " ");
             if (i % 10 == 0)
                 System.out.println();
         }

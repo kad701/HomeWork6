@@ -2,16 +2,14 @@ package Lesson7;
 
 import java.util.Scanner;
 
-import static Lesson7.Zoo.AnimalArray;
-
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter cell amount");
-        int cAmaunt= scanner.nextInt();
-        Zoo Zoo1 = new Zoo();
-        AnimalArray = new Animal[cAmaunt];
-        Zoo1.setAnimalArray();
+        int cAmaunt = scanner.nextInt();
+        Zoo zooMinsk = new Zoo();
+        zooMinsk.setAnimals(new Animal[cAmaunt]);
+        zooMinsk.setAnimalArray();
         int menuOption;
         do {
             System.out.println("Enter numbers");
@@ -25,10 +23,10 @@ public class Main {
             menuOption = scanner.nextInt();
             switch (menuOption) {
                 case 1:
-                    Zoo1.showAnimals();
+                    zooMinsk.showAnimals();
                     break;
                 case 2:
-                    Zoo1.feadAnimals();
+                    zooMinsk.feadAnimals();
                     break;
                 default:
             }

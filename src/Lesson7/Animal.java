@@ -14,14 +14,14 @@ public abstract class Animal {
     abstract public int getAnimalId();
 
 
-    static   void getAnimalAmount(){
-        for (int i = 0; i < Zoo.AnimalArray.length; i++) {
-            if(Zoo.AnimalArray[i].getAnimalId() != 0) {
-                amount++;
-            }
-        }
-        System.out.println("Колтчество животных = "+amount);
-    }
+//    static   void getAnimalAmount(){
+//        for (int i = 0; i < Zoo.animals.length; i++) {
+//            if(Zoo.animals[i].getAnimalId() != 0) {
+//                amount++;
+//            }
+//        }
+//        System.out.println("Колтчество животных = "+amount);
+//    }
 
     public  abstract String getAnimalType();
 
