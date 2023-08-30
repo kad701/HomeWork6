@@ -8,8 +8,9 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter cell amount");
-       // int cAmaunt= scanner.nextInt();
-        Zoo Zoo1 = new Zoo(50);
+        int cAmaunt= scanner.nextInt();
+        Zoo Zoo1 = new Zoo();
+        AnimalArray = new Animal[cAmaunt];
         Zoo1.setAnimalArray();
         int menuOption;
         do {

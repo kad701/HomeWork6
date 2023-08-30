@@ -3,18 +3,15 @@ package Lesson7;
 import java.util.Scanner;
 
 public class Zoo {
-    static int cellAmount;
-    static Animal[] AnimalArray = new Animal[50];
+    static public int cageAmount;
+    static public Animal[] AnimalArray;
 
-    public Zoo(int cellAmount) {
-        this.cellAmount = cellAmount;
-    }
 
     Scanner scanner = new Scanner(System.in);
 
     public void setAnimalArray() {
         int counter;
-                       ////////// enter Animals
+        ////////// enter Animals
         for (int idAnimal = 0; idAnimal < AnimalArray.length; idAnimal++) {
             counter = (int) (Math.random() * 8 + 1);
             switch (counter) {
