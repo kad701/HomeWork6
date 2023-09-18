@@ -14,6 +14,8 @@ public class ExeptionClassMethod {
                 throw new FileNotFoundException();
             case 3:
              throw new ArithmeticException();
+            case 4:
+                throw new URISyntaxException("fdsd","csafs",2);
 
         }
     }
