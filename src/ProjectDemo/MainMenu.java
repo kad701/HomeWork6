@@ -33,7 +33,6 @@ public class MainMenu implements Serializable {
                     System.out.println("You press a wrong option, try again");
                     break;
             }
-            System.out.println("Enter 1 if you start program First time or Anything if not firs time");
         }
     }
 

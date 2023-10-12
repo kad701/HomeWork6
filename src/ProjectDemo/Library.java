@@ -240,7 +240,6 @@ public class Library implements Serializable {
     }
 
     public static void getBookBackFromReader() throws IOException, ClassNotFoundException {
-        System.out.println("Enter 1 if you start program First time or Anything if not firs time");
         ArrayList<Book> currentBookList = Library.getBookList();
         ArrayList<ProjectDemo.Reader> currentReaderList = Library.getReaderList();
 

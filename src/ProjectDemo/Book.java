@@ -100,7 +100,6 @@ public class Book implements Serializable {
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("D://books.txt"));
         objectOutputStream.writeObject(books);
         objectOutputStream.close();
-        System.out.println("Enter 1 if you start program First time or Anything if not firs time");
     }
 
 }

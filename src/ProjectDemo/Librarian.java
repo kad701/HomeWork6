@@ -28,7 +28,7 @@ public class Librarian implements Serializable {
         this.password = password;
         this.name = name;
         this.surname = surname;
-        System.out.println("Enter 1 if you start program First time or Anything if not firs time");
+
     }
 
     @Override

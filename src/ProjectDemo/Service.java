@@ -20,7 +20,6 @@ public class Service implements Serializable {
     public static String enterString() {
         System.out.println("Enter a String");
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter 1 if you start program First time or Anything if not firs time");
         return scanner.nextLine();
 
     }

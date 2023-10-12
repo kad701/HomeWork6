@@ -56,7 +56,6 @@ public class ReaderMenu implements Serializable {
                     break;
                 default:
                     System.out.println("You press a wrong option");
-                    System.out.println("Enter 1 if you start program First time or Anything if not firs time");
                     break;
             }
         }
