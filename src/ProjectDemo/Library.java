@@ -5,6 +5,7 @@ import ProjectDemo.Reader;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Scanner;
 
 public class Library implements Serializable {
@@ -87,13 +88,10 @@ public class Library implements Serializable {
         System.out.println("Enter surname");
         String surname = scanner.next();
 
-        // Создать нового читателей
         ProjectDemo.Reader newReader = new ProjectDemo.Reader(login, password, name, surname);
 
-        // Добавить нового читателей к существующему списку
         existingReaders.add(newReader);
 
-        // Записать обновленный список читателей в файл
         saveReaderList(existingReaders);
     }
 
@@ -136,7 +134,7 @@ public class Library implements Serializable {
 
         for (Reader reader : readerList) {
             if (reader.getLogin().equals(login) && reader.getPassword().equals(password)) {
-                return true; // Найдено соответствие, можно вернуть true
+                return true;
             }
         }
 
@@ -201,6 +199,7 @@ public class Library implements Serializable {
         switch (answer) {
             case "Y":
                 System.out.println(" yes");
+
                 for (Book book :
                         currentBookList) {
                     if (book.getId() == idBook) {
@@ -210,13 +209,21 @@ public class Library implements Serializable {
                             for (ProjectDemo.Reader reader :
                                     currentReaderList) {
                                 if (reader.getReaderId() == readerId) {
-                                    ArrayList<Book> readerBookList = new ArrayList<>();
+                                    if (reader.getBookList() == null) {
+                                        ArrayList<Book> readerBooksList = new ArrayList<>();
+                                        readerBooksList.add(book);
+                                        reader.setBookList(readerBooksList);
+                                        Library.saveReaderList(currentReaderList);
+                                        Book.fillBooksFile(currentBookList);
+                                    } else {
+                                        ArrayList<Book> readerBooksList = reader.getBookList();
+                                        readerBooksList.add(book);
+                                        reader.setBookList(readerBooksList);
+                                        Library.saveReaderList(currentReaderList);
+                                        Book.fillBooksFile(currentBookList);
 
-                                    readerBookList.add(book);
+                                    }
 
-                                    reader.setBookList(readerBookList);
-                                    Library.saveReaderList(currentReaderList);
-                                    Book.fillBooksFile(currentBookList);
                                 }
                             }
                         }
@@ -230,6 +237,51 @@ public class Library implements Serializable {
                 System.out.println("You put a wrong answer");
         }
 
+    }
+
+    public static void getBookBackFromReader() throws IOException, ClassNotFoundException {
+        ArrayList<Book> currentBookList = Library.getBookList();
+        ArrayList<ProjectDemo.Reader> currentReaderList = Library.getReaderList();
+
+        System.out.println("Enter Reader Id");
+        int readerId = Service.enterInt();
+        System.out.println("Enter Book Id whats return to Library");
+        int bookId = Service.enterInt();
+        System.out.println("do you want get book with Id " + bookId + " from Reader " + readerId + " Y/N");
+        String answer = Service.enterString();
+        ArrayList<Reader> listReaders = Library.getReaderList();
+        switch (answer) {
+            case "Y":
+                System.out.println("You want to return a book from the reader");
+                for (Reader reader : listReaders) {
+                    if (reader.getId() == readerId) {
+                        ArrayList<Book> readerBooks = reader.getBookList();
+                        Iterator<Book> iterator = readerBooks.iterator();
+                        while (iterator.hasNext()) {
+                            Book book = iterator.next();
+                            if (book.getId() == bookId) {
+                                iterator.remove(); // Безопасное удаление элемента
+                                ArrayList<Book> libraryBooks = Library.getBookList();
+                                for (Book lbBook : libraryBooks) {
+                                    if (lbBook.getId() == bookId) {
+                                        lbBook.setAmountInStock(lbBook.getAmountInStock() + 1);
+                                        Book.fillBooksFile(libraryBooks);
+                                        Library.saveReaderList(listReaders);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                break;
+            case "N":
+                System.out.println("NO");
+                break;
+            default:
+                System.out.println("Ypu press a wrong option");
+                break;
+        }
     }
 
 }

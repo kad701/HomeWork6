@@ -22,6 +22,7 @@ public class LibrarianMenu implements Serializable {
                         System.out.println("3-Give Book to Reader");
                         System.out.println("4-Change Reader raiting");
                         System.out.println("5-Show List of Readers");
+                        System.out.println("6-Get Book back from Reader");
                         System.out.println("0-Exit");
                         int librarianAnswer = -1;
                         while (librarianAnswer != 0) {
@@ -35,7 +36,7 @@ public class LibrarianMenu implements Serializable {
                                     System.out.println("2-Find a Book");
                                     int bookId = Library.findBook(Library.getBookList());
                                     if (bookId != -1)
-                                        System.out.println(" book Id is "+bookId);
+                                        System.out.println(" book Id is " + bookId);
                                     else System.out.println("No that book in a stock");
                                     break;
                                 case 3:
@@ -45,16 +46,16 @@ public class LibrarianMenu implements Serializable {
                                 case 4:
                                     System.out.println("4-Change Reader raiting");
                                     System.out.println("put Reader id");
-                                    int readerId=Service.enterInt();
-                                    ArrayList<Reader>readerList=Library.getReaderList();
+                                    int readerId = Service.enterInt();
+                                    ArrayList<Reader> readerList = Library.getReaderList();
                                     System.out.println("1-Exellent 2-Good 3 Normal 4 Poor");
-                                    int raiting=Service.enterInt();
-                                    switch (raiting){
+                                    int raiting = Service.enterInt();
+                                    switch (raiting) {
                                         case 1:
                                             System.out.println("Exellent");
-                                            for (Reader reader:
-                                                 readerList) {
-                                                if(reader.getId()==readerId)
+                                            for (Reader reader :
+                                                    readerList) {
+                                                if (reader.getId() == readerId)
                                                     reader.setRaiting("Exellent");
                                                 Library.saveReaderList(readerList);
                                             }
@@ -62,27 +63,27 @@ public class LibrarianMenu implements Serializable {
                                             break;
                                         case 2:
                                             System.out.println("Good");
-                                            for (Reader reader:
+                                            for (Reader reader :
                                                     readerList) {
-                                                if(reader.getId()==readerId)
+                                                if (reader.getId() == readerId)
                                                     reader.setRaiting("Good");
                                                 Library.saveReaderList(readerList);
                                             }
                                             break;
                                         case 3:
                                             System.out.println("Normal");
-                                            for (Reader reader:
+                                            for (Reader reader :
                                                     readerList) {
-                                                if(reader.getId()==readerId)
+                                                if (reader.getId() == readerId)
                                                     reader.setRaiting("Normal");
                                                 Library.saveReaderList(readerList);
                                             }
                                             break;
                                         case 4:
                                             System.out.println("Poor");
-                                            for (Reader reader:
+                                            for (Reader reader :
                                                     readerList) {
-                                                if(reader.getId()==readerId)
+                                                if (reader.getId() == readerId)
                                                     reader.setRaiting("Poor");
                                                 Library.saveReaderList(readerList);
                                             }
@@ -98,6 +99,10 @@ public class LibrarianMenu implements Serializable {
                                 case 5:
                                     System.out.println("5-Show List of Readers");
                                     System.out.println(Library.getReaderList());
+                                    break;
+                                case 6:
+                                    System.out.println("6-Get Book back from Reader");
+                                    Library.getBookBackFromReader();
                                     break;
                                 case 0:
                                     System.out.println("0-Exit");

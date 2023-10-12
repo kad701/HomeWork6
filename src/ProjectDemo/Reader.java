@@ -36,12 +36,14 @@ public class Reader implements Serializable {
         this.login = login;
         this.password = password;
         this.raiting = "Normal";
-        this.bookList = bookList;
+        this.bookList = new ArrayList<Book>();
     }
+
 
     public void setBookList(ArrayList<Book> bookList) {
         this.bookList = bookList;
     }
+
 
     public ArrayList<Book> getBookList() {
         return bookList;

@@ -15,6 +15,7 @@ public class MainMenu implements Serializable {
             switch (answer) {
                 case 1:
                     System.out.println("calling Reader Menu");
+                    ReaderMenu.readerMenu();
                     break;
                 case 2:
                     System.out.println("enter a Librarian code");
