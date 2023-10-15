@@ -2,6 +2,7 @@ package ProjectDemo;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 // Программа представляет собой библиотеку. Имеется читатель и библиотекарь. Каждый заходит на портал,
 // может зарегестрироваться, если вы библиотекарь то программа попросит у вас сразу ввести код(1111),
 // если не верно то программа сразу завершается, если верно то далее предлагается либо зарегестроваться если у вас
@@ -23,17 +24,18 @@ import java.util.ArrayList;
 //
 //
 public class Main implements Serializable {
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
-        System.out.println("Enter 1 if you start program First time or Anything if not firs time");
-        String answer = Service.enterString();
-        switch (answer) {
-            case "1":
-                Book.fillBooksFile(Book.createBookList());
-                MainMenu.mainMenu();
-                break;
-            default:
-                MainMenu.mainMenu();
-        }
+    static String bookLink="D://books.txt";
+    static String readerLink="D://readerList.txt";
+    static String librarianLink = "D://librarianList.txt";
+    static String orderLink="D://orders.txt";
 
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+
+        if (Library.getBookList().isEmpty()) {
+            Book.fillBooksFile(Book.createBookList());
+            MainMenu.mainMenu();
+        } else {
+            MainMenu.mainMenu();
+        }
     }
 }

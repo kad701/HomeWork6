@@ -7,7 +7,6 @@ public class MainMenu implements Serializable {
     public static void mainMenu() throws IOException, ClassNotFoundException {
         System.out.println("Hello, Welcom to our Library");
         System.out.println("-----------------------------");
-        System.out.println("If you are a Reader press 1, if you are Librarian press 2,press 0 for Exit");
         int answer = -1;
         while (answer != 0) {
             System.out.println("If you are a Reader press 1, if you are Librarian press 2,press 0 for Exit");

@@ -97,7 +97,7 @@ public class Book implements Serializable {
 
     public static void fillBooksFile(ArrayList<Book> books) throws IOException {
 
-        ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("D://books.txt"));
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(Main.bookLink));
         objectOutputStream.writeObject(books);
         objectOutputStream.close();
     }

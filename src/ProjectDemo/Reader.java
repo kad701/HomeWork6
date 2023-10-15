@@ -56,16 +56,28 @@ public class Reader implements Serializable {
 
     public int getId() {
         return id;
-
     }
 
     @Override
     public String toString() {
         return "Reader{" +
                 "id=" + id +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
                 ", raiting='" + raiting + '\'' +
                 ", bookList=" + bookList +
                 '}';
-
     }
+
+    //    @Override
+//    public String toString() {
+//        return "Reader{" +
+//                "id=" + id +
+//                ", raiting='" + raiting + '\'' +
+//                ", bookList=" + bookList +
+//                '}';
+//
+//    }
 }

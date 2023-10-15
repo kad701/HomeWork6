@@ -13,6 +13,7 @@ public class Library implements Serializable {
     static ArrayList<ProjectDemo.Librarian> librarianList = new ArrayList<>();
     static ArrayList<ProjectDemo.Reader> readerList = new ArrayList<>();
     static ArrayList<ProjectDemo.Book> bookList = new ArrayList<>();
+    static ArrayList<Order>orderList=new ArrayList<>();
 
     // Librarian registration
     public static void registrationLibrarian() throws IOException, ClassNotFoundException {
@@ -20,8 +21,12 @@ public class Library implements Serializable {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter login for NEW Librarian");
         String login = scanner.next();
-        System.out.println("Enter password for NEW Librarian");
-        String password = scanner.next();
+        System.out.println("Enter password for NEW Librarian should be more then 8 characters");
+        String password = Service.enterString();
+        while (password.length() < 8) {
+            System.out.println("Enter password for NEW Librarian should be more then 8 characters");
+            password = Service.enterString();
+        }
         System.out.println("Enter name for NEW Librarian");
         String name = scanner.next();
         System.out.println("Enter surname for NEW Librarian");
@@ -32,7 +37,7 @@ public class Library implements Serializable {
     }
 
     public static ArrayList<ProjectDemo.Librarian> getLibrarianList() throws IOException, ClassNotFoundException {
-        File file = new File("D://librarianList.txt");
+        File file = new File(Main.librarianLink);
         if (!file.exists() || file.length() == 0) {
 
             return new ArrayList<>();
@@ -45,7 +50,7 @@ public class Library implements Serializable {
     }
 
     public static void saveLibrarianList(ArrayList<ProjectDemo.Librarian> librarianList) throws IOException {
-        FileOutputStream fileOutputStream = new FileOutputStream("D://librarianList.txt");
+        FileOutputStream fileOutputStream = new FileOutputStream(Main.librarianLink);
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
 
         objectOutputStream.writeObject(librarianList);
@@ -57,7 +62,7 @@ public class Library implements Serializable {
     // Librarian LogIn
     public static boolean logInLibrarian() throws IOException, ClassNotFoundException {
 
-        ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("D://librarianList.txt"));
+        ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(Main.librarianLink));
         ArrayList<ProjectDemo.Librarian> librarianList = (ArrayList<ProjectDemo.Librarian>) objectInputStream.readObject();
 
         objectInputStream.close();
@@ -66,7 +71,8 @@ public class Library implements Serializable {
         System.out.println("enter Librarian Login");
         String login = scanner.next();
         System.out.println("enter Librarian password");
-        String password = scanner.next();
+        String password = Service.enterString();
+
         for (ProjectDemo.Librarian librarian :
                 librarianList) {
             if (librarian.getLogin().equals(login) && librarian.getPassword().equals(password))
@@ -78,17 +84,21 @@ public class Library implements Serializable {
     // Reader registration
     public static void registrationReader() throws IOException, ClassNotFoundException {
         ArrayList<ProjectDemo.Reader> existingReaders = getReaderList();
-        Scanner scanner = new Scanner(System.in);
+       Scanner scanner = new Scanner(System.in);
         System.out.println("Enter login");
-        String login = scanner.next();
+        String login = Service.enterString();
         System.out.println("Enter password");
-        String password = scanner.next();
+        String password = Service.enterString();
+        while (password.length() < 8) {
+            System.out.println("Enter password for NEW Reader should be more then 8 characters");
+            password = Service.enterString();
+        }
         System.out.println("Enter name");
-        String name = scanner.next();
+        String name = Service.enterString();
         System.out.println("Enter surname");
-        String surname = scanner.next();
+        String surname = Service.enterString();
 
-        ProjectDemo.Reader newReader = new ProjectDemo.Reader(login, password, name, surname);
+        ProjectDemo.Reader newReader = new ProjectDemo.Reader( name, surname,login,password);
 
         existingReaders.add(newReader);
 
@@ -96,7 +106,7 @@ public class Library implements Serializable {
     }
 
     public static ArrayList<ProjectDemo.Reader> getReaderList() throws IOException, ClassNotFoundException {
-        File file = new File("D://readerList.txt");
+        File file = new File(Main.readerLink);
         if (!file.exists() || file.length() == 0) {
 
             return new ArrayList<>();
@@ -109,7 +119,7 @@ public class Library implements Serializable {
     }
 
     public static void saveReaderList(ArrayList<ProjectDemo.Reader> readerList) throws IOException {
-        FileOutputStream fileOutputStream = new FileOutputStream("D://readerList.txt");
+        FileOutputStream fileOutputStream = new FileOutputStream(Main.readerLink);
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
 
         objectOutputStream.writeObject(readerList);
@@ -119,8 +129,8 @@ public class Library implements Serializable {
     }
 
     // reader LogIn
-    public static boolean logInReader() throws IOException, ClassNotFoundException {
-        ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("D://readerList.txt"));
+    public static int logInReader() throws IOException, ClassNotFoundException {
+        ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(Main.readerLink));
         ArrayList<Reader> readerList = (ArrayList<Reader>) objectInputStream.readObject();
 
         objectInputStream.close();
@@ -134,17 +144,17 @@ public class Library implements Serializable {
 
         for (Reader reader : readerList) {
             if (reader.getLogin().equals(login) && reader.getPassword().equals(password)) {
-                return true;
+                return reader.getReaderId();
             }
         }
 
 
-        return false;
+        return -1;
     }
 
     // get List of Books
     public static ArrayList<ProjectDemo.Book> readBooksFromFile() throws IOException, ClassNotFoundException {
-        ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("D://books.txt"));
+        ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(Main.bookLink));
         ArrayList<ProjectDemo.Book> bookList = new ArrayList<>();
         try {
             while (true) {
@@ -174,7 +184,7 @@ public class Library implements Serializable {
     // Give book to Reader
     public static ArrayList<ProjectDemo.Book> getBookList() throws IOException, ClassNotFoundException {
 
-        File file = new File("D://books.txt");
+        File file = new File(Main.bookLink);
         if (!file.exists() || file.length() == 0) {
 
             return new ArrayList<>();
@@ -283,6 +293,65 @@ public class Library implements Serializable {
                 break;
         }
     }
+
+    //
+    public static void makeOrder(int idReader) throws IOException, ClassNotFoundException {
+        ArrayList<Order> existingOrder= getOrderList();
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter login book title you are looking");
+        String title = Service.enterString();
+
+        Order newOrder = new Order(getOrderList().size(), idReader, title);
+
+        existingOrder.add(newOrder);
+
+        saveOrderList(existingOrder);
+    }
+
+
+    public static ArrayList<Order> getOrderList() throws IOException, ClassNotFoundException {
+        File file = new File(Main.orderLink);
+        if (!file.exists() || file.length() == 0) {
+            return new ArrayList<>();
+        }
+        ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(file));
+        ArrayList<Order> orderList = (ArrayList<Order>) objectInputStream.readObject();
+        objectInputStream.close();
+
+        return orderList;
+    }
+
+    public static void saveOrderList(ArrayList<Order> orderList) throws IOException {
+        FileOutputStream fileOutputStream = new FileOutputStream(Main.orderLink);
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+
+        objectOutputStream.writeObject(orderList);
+
+        objectOutputStream.close();
+        fileOutputStream.close();
+    }
+
+public static void removeOrder(int orderId) throws IOException, ClassNotFoundException {
+        ArrayList<Order>orderArrayList=new ArrayList<>();
+        if(!Library.getOrderList().isEmpty()){
+            orderArrayList=Library.getOrderList();
+            Order orderRemoved= null;
+            for (Order order:
+                 orderArrayList) {
+                if (order.getId()==orderId) {
+                    orderRemoved=order;
+                    
+                }
+            }
+            orderArrayList.remove(orderRemoved);
+            Library.saveOrderList(orderArrayList);
+        }
+        else System.out.println("No orders");
+}
+
+
+
+    //
 
 }
 
